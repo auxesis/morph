@@ -33,3 +33,7 @@ config/database.yml
 coverage
 db/backups
 docker_images/morph-mitmdump/mitmproxy/mitmproxy-dhparam.pem
+
+# Ansible bits
+provisioning/*.pem
+provisioning/playbook.retry

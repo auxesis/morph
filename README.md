@@ -126,20 +126,60 @@ We're using [git-encrypt](https://github.com/shadowhand/git-encrypt) to encrypt 
 
 #### Production devops development
 
-Install [Vagrant](http://www.vagrantup.com/) and [Ansible](http://www.ansible.com/). Comment out the user line in [`provisioning/playbook.yml`](https://github.com/openaustralia/morph/blob/17e05ed5bc540be683e5fdf90d1fefaa0f81c56f/provisioning/playbook.yml#L10-L11) and run `vagrant up local`. This will build and provision a box that looks and acts like production at `dev.morph.io`.
+Install [Vagrant](http://www.vagrantup.com/) and [Ansible](http://www.ansible.com/).
+
+Comment out the user line in [`provisioning/playbook.yml`](https://github.com/openaustralia/morph/blob/17e05ed5bc540be683e5fdf90d1fefaa0f81c56f/provisioning/playbook.yml#L10-L11) and run
+
+```
+vagrant up local
+```
+
+This will build and provision a box that looks and acts like production at `dev.morph.io`.
 
 Add these lines to your `/etc/hosts` file:
 
-    192.168.11.2  dev.morph.io
-    192.168.11.2  faye.dev.morph.io
-    192.168.11.2  api.dev.morph.io
-    192.168.11.2  discuss.dev.morph.io
+```
+192.168.11.2  dev.morph.io
+192.168.11.2  faye.dev.morph.io
+192.168.11.2  api.dev.morph.io
+192.168.11.2  discuss.dev.morph.io
+```
 
 Once the box is created and provisioned, deploy the application to your Vagrant box:
 
-    cap local deploy
+```
+cap local deploy
+```
 
 Now visit https://dev.morph.io/
+
+#### AWS setup
+
+If you are firing up an environment in AWS, install the Vagrant AWS plugin and dummy box with:
+
+```
+vagrant plugin install vagrant-aws
+vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+```
+
+Then in the AWS console, create:
+
+ - a new IAM user, with programatic access, with the `AdministratorAccess` IAM role
+ - a new EC2 keypair (call it `morph_dev`), and copy it into `provisioning/`
+
+Export the following environment variables:
+
+```
+export AWS_ACCESS_KEY_ID="AKIALAHGKMM7YZKY6ABC"
+export AWS_SECRET_ACCESS_KEY="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"
+export KEYPAIR_NAME=morph_dev
+```
+
+Then start the instance:
+
+```
+vagrant up aws
+```
 
 #### Production provisioning and deployment
 
