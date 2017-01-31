@@ -185,11 +185,15 @@ vagrant up aws
 
 To deploy morph.io to production, normally you'll just want to deploy using Capistrano:
 
-    cap production deploy
+```
+cap production deploy
+```
 
 When you've changed the Ansible playbooks to modify the infrastructure you'll want to run:
 
-    ansible-playbook --user=root --inventory-file=provisioning/hosts provisioning/playbook.yml
+```
+ansible-playbook --user=root --inventory-file=provisioning/hosts provisioning/playbook.yml
+```
 
 ### How to contribute
 
