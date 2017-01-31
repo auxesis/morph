@@ -38,29 +38,3 @@
 # 3. Save changes
 # 4. Reboot from the Dashboard tab
 
-- name: Install apt-transport-https
-  apt: pkg=apt-transport-https state=present
-
-- name: Install ca-certificates
-  apt: pkg=ca-certificates state=present
-
-- name: Ensure that we have the Docker repository key
-  apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
-
-- name: Ensure that pycurl is installed (for ansible)
-  apt: pkg=python-pycurl
-
-- name: Ensure that we have the docker repository
-  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-precise main'
-
-- name: Remove old lxc-docker package
-  apt: pkg=lxc-docker state=absent purge=yes
-
-- name: Ensure that the docker package is installed
-  apt: pkg=docker-engine
-
-- name: Configure docker to disable inter-container communication
-  copy:
-    src: docker
-    dest: /etc/default/docker
-  notify: restart docker

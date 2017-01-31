@@ -1,0 +1,5 @@
+- include: linode.yml
+  when: ansible_bios_version | search('qemu-project.org')
+#- include: aws.yml
+#  when: ansible_bios_version | search('amazon')
+- include: common.yml

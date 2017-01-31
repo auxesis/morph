@@ -1,9 +1,6 @@
 ---
 dependencies:
-  - role: docker-server-linode
-    when: ansible_bios_version | search('qemu-project.org')
-  - role: docker-server-aws
-    when: ansible_bios_version | search('amazon')
+  - { role: docker-server }
   - { role: nginx-passenger }
   - { role: ruby }
   - { role: mysql }
