@@ -10,7 +10,7 @@
   apt: update_cache=yes
   when: apt.changed
 - name: Install percona xtrabackup
-  apt: pkg=percona-xtrabackup update_cache=yes cache_valid_time=3600
+  apt: pkg=percona-xtrabackup
 - name: Copy across database backup script
   copy: src=database-backup.sh dest=/usr/local/bin/database-backup.sh mode=0500
 - name: Run database backup at 6:25am
