@@ -10,6 +10,7 @@
 # ansible-playbook --user=root -i hosts playbook.yml
 #
 - hosts: all
-  sudo: true
+  become: yes
+  become_user: root
   roles:
     - morph-app
